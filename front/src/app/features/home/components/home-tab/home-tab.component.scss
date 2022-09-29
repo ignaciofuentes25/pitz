@@ -1,0 +1,42 @@
+@import "../../../../../styles/_var.scss";
+
+.row-fix {
+  height: 450px;
+}
+
+.col-fix {
+  align-self: center !important;
+  color: white;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.description {
+  font-size: 20px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.whatsapp {
+  background-color: #1babcc;
+  border-color: #1babcc;
+  color: white;
+  width: 150px;
+}
+
+.download {
+  margin-left: 20px;
+  background-color: #128bcb;
+  border-color: #128bcb;
+  color: white;
+  width: 150px;
+}
+
+.card-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}

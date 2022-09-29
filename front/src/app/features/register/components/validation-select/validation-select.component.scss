@@ -1,0 +1,73 @@
+@import "../../../../../styles/_var.scss";
+
+.container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  max-width: 700px;
+
+  .fix-button {
+    background-color:#1babcc;
+    border-color: #1babcc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .row {
+    --bs-gutter-x: 0 !important;
+  }
+
+  .card-fixed {
+    margin: 30px 30px 30px 30px;
+
+    .title {
+      font-size: 3vh;
+    }
+
+    .margin-form{
+      margin-top: 30px;
+    }
+
+    .icon {
+      margin-right: 50px;
+      margin-top: 10px;
+      color: #1babcc;
+      font-size: 75px;
+    }
+
+    .row-icon{
+      justify-content: center;
+      height: 100px;
+    }
+  }
+
+  .footer {
+    .text-fix {
+      font-size: 20px;
+      color: #1babcc;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.menu-fixed {
+  margin: 5px 10px 5px 10px;
+  .center {
+    align-self: center;
+  }
+  .icon {
+    margin-top: 10px;
+    color: #1babcc;
+    font-size: 6vh;
+  }
+
+  .title {
+    color: #2D2F30;
+    font-size: 2vh;
+  }
+
+  .subtitle {
+    color: #7A7F83;
+    font-size: 2vh;
+  }
+}

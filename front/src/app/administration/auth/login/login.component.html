@@ -1,0 +1,64 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  style="height: 100%"
+  [formGroup]="loginForm"
+>
+  <div class="login mat-elevation-z12">
+    <div class="login-header" fxLayout="column" fxLayoutAlign="center center">
+      <img class="logo" src="assets/img/logo2x.png" />
+    </div>
+    <div class="login-content" fxLayout="column" fxLayoutAlign="start stretch">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Correo Electrónico"
+          name="email"
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Contraseña"
+          type="password"
+          name="password"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <!-- <div
+        class="extra-options"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <p class="remember-me"></p>
+        <a class="forgot-password" [routerLink]="['/auth/forgot-password']"
+          >Has olvidado tu contraseña?</a
+        >
+      </div> -->
+      <button
+        class="btn-color"
+        color="primary"
+        mat-raised-button
+        (click)="login()"
+        [class.spinner]="loading$ | async"
+        [disabled]="loading$ | async"
+      >
+        Iniciar Sesión
+      </button>
+      <p class="note">
+        <a [routerLink]="['/']">Volver a la página principal</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="row" style="place-content: center">
+    <div
+      class="alert alert-warning col-6"
+      role="alert"
+      style="margin-top: 20px"
+    >
+      Código-QA: PITZ-F0007 v(1.1.2)
+    </div>
+  </div>
+</div>

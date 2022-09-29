@@ -1,0 +1,108 @@
+<div class="container" [formGroup]="loginForm">
+  <div class="areachart-widget card border space">
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="title">Bienvenido/a</div>
+        </div>
+        <div class="row">
+          <div class="subtitle">
+            <b>Ingresa tu e-mail</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center margin-form">
+        <div class="col-md-6 col-10">
+          <label class="form-label">Email</label>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="correoelectronico@pitz.com"
+              formControlName="email"
+              pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+            />
+          </mat-form-field>
+
+          <div
+            *ngIf="
+              loginForm.controls['email'].invalid &&
+              (loginForm.controls['email'].dirty ||
+                loginForm.controls['email'].touched)
+            "
+          >
+            <div
+              *ngIf="loginForm.controls['email'].errors.required"
+              class="errorMesagge-form"
+            >
+              El email es requerido.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-10">
+          <label class="form-label">Contraseña</label>
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" type="password" />
+          </mat-form-field>
+          <div
+            *ngIf="
+              loginForm.controls['password'].invalid &&
+              (loginForm.controls['password'].dirty ||
+                loginForm.controls['password'].touched)
+            "
+          >
+            <div
+              *ngIf="loginForm.controls['password'].errors.required"
+              class="errorMesagge-form"
+            >
+              La contraseña es requerida.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-10">
+          <button
+            mat-raised-button
+            type="button"
+            class="btn btn-primary fix-button"
+            (click)="login()"
+            [class.spinner]="loading$ | async"
+            [disabled]="loading$ | async"
+          >
+            Continuar
+          </button>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-10">
+          <button
+            type="button"
+            class="btn btn-light fix-button-light"
+            (click)="createAccount()"
+          >
+            Crear Cuenta
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer row">
+      <div class="text-center">
+        <div class="text-fix">Necesito ayuda para ingresar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="place-content: center">
+  <div class="alert alert-warning col-6" role="alert" style="margin-top: 20px">
+    Código-QA: PITZ-F0003 v(1.1.2)
+  </div>
+</div>

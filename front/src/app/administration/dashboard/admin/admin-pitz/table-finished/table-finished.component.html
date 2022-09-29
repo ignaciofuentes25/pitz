@@ -1,0 +1,92 @@
+<div #tableElement class="table-pagination">
+  <div class="container">
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns"></mat-row>
+
+        <!-- ID Column -->
+        <ng-container cdkColumnDef="n">
+          <mat-header-cell *cdkHeaderCellDef> N° </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{ row.n }}</mat-cell>
+        </ng-container>
+
+        <!-- Service Column -->
+        <ng-container cdkColumnDef="service">
+          <mat-header-cell *cdkHeaderCellDef> Servicio </mat-header-cell>
+          <mat-cell *cdkCellDef="let row; let i = index">
+            {{ row.service[i] }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Service Column -->
+        <ng-container cdkColumnDef="cliente">
+          <mat-header-cell *cdkHeaderCellDef> Cliente </mat-header-cell>
+          <mat-cell *cdkCellDef="let row; let i = index">
+            {{ row.clients[i] }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container cdkColumnDef="date">
+          <mat-header-cell *cdkHeaderCellDef> Fecha </mat-header-cell>
+          <mat-cell *cdkCellDef="let row; let i = index">
+            {{ row.date[i] | date: "dd/MM/yyyy" }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container cdkColumnDef="state">
+          <mat-header-cell *cdkHeaderCellDef> Estado </mat-header-cell>
+          <mat-cell *cdkCellDef="let row; let i = index">
+            {{ row.state[i] === "5" ? "Finalizada" : "Desconocido" }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <!-- <ng-container cdkColumnDef="actions">
+          <mat-header-cell *cdkHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell *cdkCellDef="let row; let i = index">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              (click)="saveRowFunction(row, i)"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button></mat-cell
+          >
+        </ng-container> -->
+      </mat-table>
+
+      <mat-paginator
+        #paginator
+        [length]="exampleDatabase?.data.length"
+        [pageIndex]="0"
+        [pageSize]="10"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+
+  <div class="row" style="place-content: center">
+    <div
+      class="alert alert-warning col-6"
+      role="alert"
+      style="margin-top: 20px"
+    >
+      Código-QA: PITZ-F0010 v(1.1.1)
+    </div>
+  </div>
+</div>
+
+<ng-container>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="[selectedId, 'view']">
+      <mat-icon>visibility</mat-icon>
+      <span>Ver</span>
+    </button>
+  </mat-menu>
+</ng-container>

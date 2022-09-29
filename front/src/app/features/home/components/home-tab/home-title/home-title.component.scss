@@ -1,0 +1,42 @@
+@import "../../../../../../styles/var";
+
+.home-title {
+  text-align: center;
+  // margin-right: 40vh;
+
+  .title {
+    font-size: 50px;
+    color: white;
+    margin-bottom: 6px;
+  }
+
+  .subTitle {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 6px;
+  }
+
+  .crumbs {
+    place-content: center;
+  }
+
+  .icon {
+    margin-top: 10%;
+    color: white;
+    transform: scale(5);
+    margin-bottom: 5%;
+  }
+}
+
+.whatsapp {
+  background-color: #1babcc;
+  border-color: #1babcc;
+  color: white;
+}
+
+.download {
+  margin-left: 20px;
+  background-color: #128bcb;
+  border-color: #128bcb;
+  color: white;
+}

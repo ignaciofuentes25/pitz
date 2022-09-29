@@ -1,0 +1,91 @@
+@import "../../../styles/_var.scss";
+
+.container {
+  .fix-button {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #1babcc;
+    border-color: #1babcc;
+  }
+}
+
+.content {
+  .row {
+    margin-top: 10px;
+  }
+}
+
+.card-fixed {
+  margin: 10px 10px 10px 10px;
+  .center {
+    align-self: center;
+  }
+  .icon {
+    margin-top: 10px;
+    color: #1babcc;
+    font-size: 5vw;
+  }
+
+  .title {
+    font-size: 3vh;
+  }
+}
+
+.wellcome-fix {
+  align-self: center;
+  color: #1babcc;
+}
+
+.firts-container {
+  margin-top: 5%;
+}
+
+.second-container {
+  margin-top: 2%;
+}
+
+.list-menu {
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  margin-left: 5%;
+  margin-right: 4%;
+}
+
+.active {
+  background-color: #e8f6fa;
+  border-color: #e8f6fa;
+  color: black;
+
+  // &:hover{
+  //   color: #E8F6FA;
+  // }
+}
+
+.menu-fixed {
+  margin: 5px 10px 5px 10px;
+  .center {
+    align-self: center;
+  }
+  .icon {
+    margin-top: 10px;
+    color: #1babcc;
+    font-size: 6vh;
+  }
+
+  .title {
+    color: #2d2f30;
+    font-size: 2vh;
+  }
+
+  .subtitle {
+    color: #7a7f83;
+    font-size: 2vh;
+  }
+}
+
+.fix-bottom {
+  margin-bottom: 5%;
+}

@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="areachart-widget card border space">
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="title">Tus datos</div>
+        </div>
+        <div class="row">
+          <div class="subtitle">
+            Valida tus datos para que nadie pueda ingresar o crear una cuenta en
+            tu nombre.
+          </div>
+        </div>
+      </div>
+
+      <div class="row list-menu" style="margin-top: 20px">
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action">
+            <div class="row menu-fixed">
+              <div
+                class="col-md-2 col-sm-2 col-2 d-sm-none d-md-block d-none d-sm-block"
+              >
+                <mat-icon class="icon"> mail </mat-icon>
+              </div>
+              <div class="col-md-8 col-sm-8 col-8 center">
+                <div class="row">
+                  <div class="title">Validar e-mail</div>
+                </div>
+                <div class="row">
+                  <div class="subtitle">
+                    Lo usaras para recuperar su cuenta.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-2 col-4 center">
+                <div class="row">
+                  <button
+                    (click)="changeStatusFunction()"
+                    type="button"
+                    class="btn btn-primary fix-button"
+                  >
+                    Validar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer row">
+      <div class="text-center">
+        <div class="text-fix">Necesito ayuda para ingresar</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+@import "../../../../../styles/_var.scss";
+
+.container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  .fix-button {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #1babcc;
+    border-color: #1babcc;
+  }
+}
+
+.content {
+  .row {
+    margin-top: 10px;
+  }
+}
+
+.card-fixed {
+  margin: 10px 10px 10px 10px;
+  .center {
+    align-self: center;
+  }
+  .icon {
+    color: #1babcc;
+    font-size: 5vw;
+  }
+
+  .title {
+    font-size: 3vh;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.error-mesagge {
+  text-align: -webkit-right;
+  color: #ff6c4f;
+  margin-top: -30px;
+}

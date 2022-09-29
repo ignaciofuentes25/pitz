@@ -1,0 +1,70 @@
+<div class="container" [formGroup]="serviceForm">
+  <div class="areachart-widget card border space">
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="title">Solicita su servicio!</div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" *ngIf="!multiple">
+        <div class="col-md-6 col-10">
+          <label class="form-label">Selecciona un servicio:</label>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione un servicio</mat-label>
+            <mat-select formControlName="service">
+              <mat-option *ngFor="let s of listServices" [value]="s.seR_ID">
+                {{ s.seR_NOMBRE }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" *ngIf="multiple">
+        <div class="col-md-6 col-10">
+          <label class="form-label">Selecciona un servicio:</label>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione un servicio</mat-label>
+            <mat-select formControlName="service" multiple>
+              <mat-option *ngFor="let s of listServices" [value]="s.seR_ID">
+                {{ s.seR_NOMBRE }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-10">
+          <label class="form-label">Descripción:</label>
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-10">
+          <button
+            mat-raised-button
+            type="button"
+            class="btn btn-primary fix-button"
+            (click)="setServiceFunction()"
+            [class.spinner]="loadingSend$ | async"
+            [disabled]="loadingSend$ | async"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer row">
+      <div class="text-center">
+        <div class="text-fix">Necesito ayuda</div>
+      </div>
+    </div>
+  </div>
+</div>

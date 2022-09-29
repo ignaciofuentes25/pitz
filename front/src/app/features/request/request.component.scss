@@ -1,0 +1,41 @@
+@import "../../../styles/_var.scss";
+
+.card-fixed {
+  margin: 20px 10px 20px 10px;
+  .center {
+    align-self: center;
+  }
+  .icon {
+    color: #1babcc;
+    font-size: 5vw;
+  }
+
+  .icon-menu {
+    font-size: 8vw;
+  }
+
+  .title {
+    font-size:40px;
+  }
+}
+
+.firts-container {
+  margin-top: 5%;
+}
+
+.second-container {
+  margin-top: 1%;
+}
+
+.container {
+  .fix-button {
+    background-color:#1babcc;
+    border-color: #1babcc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.fix-bottom{
+  margin-bottom: 5%;
+}

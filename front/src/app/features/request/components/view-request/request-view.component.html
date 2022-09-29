@@ -1,0 +1,535 @@
+<div class="container firts-container" [formGroup]="requestForm">
+  <div class="areachart-widget card border space">
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="title">
+                {{ (request$ | async)?.fK_SER_ID.seR_NOMBRE }}
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row new-row">
+              <div class="subtitle">
+                <b>Descripción</b>
+              </div>
+
+              <div>
+                {{ (request$ | async)?.soL_DESCRIPCION }}
+              </div>
+              <div
+                class="row justify-content-center margin-form"
+                *ngIf="descriptionEdition"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>Descripcion</mat-label>
+                  <textarea
+                    matInput
+                    placeholder="Inserte una descricion"
+                    formControlName="description"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row new-row">
+              <div class="subtitle">
+                <b>Mensajeria</b> ({{
+                  isUser
+                    ? (request$ | async)?.fK_USW_ID.usW_NOMBRE
+                    : (request$ | async)?.fK_USU_ID.usU_NOMBRE
+                }})
+              </div>
+            </div>
+            <div class="row new-row" style="height: 500px !important">
+              <pitz-chat
+                class="fix-chat-h"
+                [requestId]="requestId"
+                [isUser]="isUser"
+                [isWebUser]="isWebUser"
+              ></pitz-chat>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Propuesta
+                  <button
+                    class="edit-button"
+                    mat-icon-button
+                    (click)="editProposalFunction()"
+                    *ngIf="isWebUser && (state$ | async) !== '4'"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </h5>
+
+                <p class="card-text" *ngIf="!proposalEdition">
+                  {{ requestForm.controls["proposal"].value }}
+                </p>
+
+                <div class="row" *ngIf="proposalEdition" style="width: 100%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Propuesta</mat-label>
+                    <textarea
+                      matInput
+                      placeholder="Inserte una propuesta"
+                      formControlName="proposal"
+                      (keyup.enter)="onEnterProposal()"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="row" *ngIf="proposalEdition">
+                  <div class="col-md-12">
+                    <button
+                      type="button"
+                      class="btn btn-primary fix-button"
+                      (click)="onEnterProposal()"
+                    >
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h5 class="card-title">
+                    Pago
+                    <button
+                      class="edit-button"
+                      mat-icon-button
+                      (click)="editPaymentFunction()"
+                      *ngIf="isWebUser && (state$ | async) !== '4'"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </h5>
+                  <p class="card-text" *ngIf="!paymentEdition">
+                    Costo acordado del servicio: ${{
+                      requestForm.controls["payment"].value
+                    }}
+                  </p>
+                  <div class="row" *ngIf="paymentEdition" style="width: 100%">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Pago</mat-label>
+                      <input
+                        matInput
+                        type="number"
+                        placeholder="Inserte una valor"
+                        formControlName="payment"
+                        min="0"
+                        (keyup.enter)="onEnterPayment()"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="row" *ngIf="paymentEdition">
+                    <div class="col-md-12">
+                      <button
+                        type="button"
+                        class="btn btn-primary fix-button"
+                        (click)="onEnterPayment()"
+                      >
+                        Guardar
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="changeStatePayment()"
+                    *ngIf="isUser && (state$ | async) === '3'"
+                  >
+                    Pagar Ahora
+                  </button>
+                </li>
+                <li
+                  *ngIf="(state$ | async) === '3' && !isWebUser"
+                  class="list-group-item"
+                >
+                  <h5 class="card-title">Medios de pago</h5>
+                  <div class="row">
+                    <div>Tarjetas de crédito</div>
+                    <div class="col-2">
+                      <img
+                        src="../../../../assets/img/cards/visa.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-4">
+                      <img
+                        src="../../../../assets/img/cards/master-card.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div>Tarjetas de débito</div>
+                    <div class="col-4">
+                      <img
+                        src="../../../../assets/img/cards/webplay-plus.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <img
+                        src="../../../../assets/img/cards/visa-debito.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-2">
+                      <img
+                        src="../../../../assets/img/cards/mastercard-debito.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <img
+                        src="../../../../assets/img/cards/redcompra.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="link">Conoce otros medios de pago</div>
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="(state$ | async) === '4' && isUser"
+                >
+                  <h5 class="card-title">Historial de seguimiento</h5>
+                  <pitz-timeline [requestId]="requestId"></pitz-timeline>
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="isWebUser && (state$ | async) === '4'"
+                >
+                  <h5 class="card-title">Estados del servicio</h5>
+                  <div class="row justify-content-center margin-form">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Historial de seguimiento</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="Describa el estado actual"
+                        formControlName="status"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button
+                        type="button"
+                        class="btn btn-primary fix-button"
+                        (click)="changeStatusHistoryFunction()"
+                      >
+                        Guardar
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                class="list-group list-group-flush"
+                *ngIf="isWebUser && (state$ | async) !== '4'"
+              >
+                <li class="list-group-item">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="sendProposalFunction()"
+                    [disabled]="
+                      requestForm.controls['payment'].value === 0 ||
+                      requestForm.controls['proposal'].value.trimStart() ===
+                        '' ||
+                      requestForm.controls['proposal'].value ===
+                        'Aun no se ha definido una propuesta.'
+                    "
+                  >
+                    Enviar Propueta
+                  </button>
+                </li>
+                <li *ngIf="!timeline && !isWebUser" class="list-group-item">
+                  <h5 class="card-title">Medios de pago</h5>
+                  <div class="row">
+                    <div>Tarjetas de crédito</div>
+                    <div class="col-2">
+                      <img
+                        src="../../../../assets/img/cards/visa.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-4">
+                      <img
+                        src="../../../../assets/img/cards/master-card.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div>Tarjetas de débito</div>
+                    <div class="col-4">
+                      <img
+                        src="../../../../assets/img/cards/webplay-plus.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <img
+                        src="../../../../assets/img/cards/visa-debito.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-2">
+                      <img
+                        src="../../../../assets/img/cards/mastercard-debito.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <img
+                        src="../../../../assets/img/cards/redcompra.svg"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="link">Conoce otros medios de pago</div>
+                </li>
+                <li class="list-group-item" *ngIf="timeline && isUser">
+                  <h5 class="card-title">Historial de seguimiento</h5>
+                  <pitz-timeline [requestId]="requestId"></pitz-timeline>
+                </li>
+              </ul>
+              <ul
+                class="list-group list-group-flush"
+                *ngIf="isWebUser && (state$ | async) === '4'"
+              >
+                <li class="list-group-item">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="finishServiceFunction()"
+                  >
+                    Finalizar Servicio
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="areachart-widget card border space"
+    style="margin-top: 30px"
+    *ngIf="isWebUser && (vehicles$ | async).length > 0"
+  >
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="title">Vehículos Registrados</div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row justify-content-center text-center">
+              <div class="col-md-2" *ngFor="let veh of vehicles$ | async">
+                <button
+                  type="button"
+                  class="btn btn-primary fix-button-2"
+                  (click)="setDataVehicleFormFunction(veh)"
+                >
+                  <img
+                    src="./../../../../../assets/img/car_icon.png"
+                    class="rounded hoverImg"
+                    width="150"
+                    height="150"
+                  />
+                </button>
+                <div class="row text-center">
+                  <span
+                    >{{ veh.fK_VEHICULOS_MAR_ID.maR_NOMBRE }} |
+                    {{ veh.fK_VEHICULOS_MOD_ID.moD_NOMBRE }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="areachart-widget card border space"
+    style="margin-top: 30px"
+    *ngIf="isWebUser"
+  >
+    <div class="row card-fixed">
+      <div class="col-md-12 col-sm-12 col-12 center">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="title">Ficha Vehículo</div>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="row justify-content-center margin-form"
+              style="margin-top: 10px"
+            >
+              <div class="col">
+                <label class="form-label">Marca:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Marca</mat-label>
+                  <mat-select formControlName="mark">
+                    <mat-option
+                      *ngFor="let brand of brands$ | async"
+                      [value]="brand.maR_ID"
+                    >
+                      {{ brand.maR_NOMBRE }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label class="form-label">Modelo:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Modelo</mat-label>
+                  <mat-select formControlName="model">
+                    <mat-option
+                      *ngFor="let model of models$ | async"
+                      [value]="model.moD_ID"
+                    >
+                      {{ model.moD_NOMBRE }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label class="form-label">Patente:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Patente</mat-label>
+                  <input
+                    matInput
+                    placeholder="Inserte una descricion"
+                    formControlName="patent"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              class="row justify-content-center margin-form"
+              style="margin-top: 10px"
+            >
+              <div class="col">
+                <label class="form-label">Año:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Año</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    min="0"
+                    placeholder="Inserte un año"
+                    formControlName="year"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label class="form-label">Vin:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Vin</mat-label>
+                  <input
+                    matInput
+                    placeholder="Inserte un vin"
+                    formControlName="vin"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="title">Ficha Cliente</div>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="row justify-content-center margin-form"
+              style="margin-top: 10px"
+            >
+              <div class="col">
+                <label class="form-label">Dirección:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Dirección</mat-label>
+                  <input
+                    matInput
+                    placeholder="Inserte una direccion"
+                    formControlName="address"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label class="form-label">Número:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Numero</mat-label>
+                  <input
+                    matInput
+                    placeholder="Inserte un numero"
+                    formControlName="address_number"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label class="form-label">Comuna:</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Communa</mat-label>
+                  <mat-select formControlName="commune">
+                    <mat-option
+                      *ngFor="let commune of communes$ | async"
+                      [value]="commune.coM_ID"
+                    >
+                      {{ commune.coM_NOMBRE }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                  type="button"
+                  class="btn btn-primary fix-button"
+                  (click)="saveVehicleInfoFunction()"
+                >
+                  Crear Vehículo
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary fix-button"
+                  (click)="updateVehicleInfoFunction()"
+                  style="margin-right: 10px"
+                  *ngIf="(vehicles$ | async).length > 0"
+                >
+                  Actualizar Vehículo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="place-content: center">
+  <div class="alert alert-warning col-6" role="alert" style="margin-top: 20px">
+    Código-QA: PITZ-F0006 v(1.1.3)
+  </div>
+</div>
