@@ -1,9 +1,0 @@
-<div class="container">
-  <ul class="sessions">
-    <li *ngFor="let track of trackingHistory$ | async">
-      <div class="time">{{ track.hiS_CREADO | date: "short" }}</div>
-      <p>{{ track.hiS_MENSAJE }}</p>
-    </li>
-  </ul>
-</div>
-<!-- <div class="see-more btn">Mostrar más</div> -->
