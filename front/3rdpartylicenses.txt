@@ -151,6 +151,8 @@ THE SOFTWARE.
 
 @angular/material/icon
 
+@angular/material/list
+
 @angular/material/menu
 
 @angular/material/paginator
@@ -168,6 +170,8 @@ THE SOFTWARE.
 @angular/material/table
 
 @angular/material/tabs
+
+@angular/material/toolbar
 
 @angular/material/tooltip
 
